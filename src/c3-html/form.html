@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>form</title>
+</head>
+
+<body>
+    <div style="width: 300px;text-align: center">
+        <form action="users" method="GET">
+            <label>username: <input type="text" name="username" autocomplete="off"></label>
+            <hr>
+            <label>password: <input type="password" name="password"></label>
+            <hr>复选框：
+            <label><input type="checkbox" name="fruit" value="apple" checked>苹果</label>
+            <label><input type="checkbox" name="fruit" value="banana">香蕉</label>
+            <hr>单选框：
+            <label><input type="radio" name="hobby" value="swim">游泳</label>
+            <label><input type="radio" name="hobby" value="run">跑步</label>
+            <hr>下拉列表：
+            <select name="group">
+                <option value="1">第一组</option>
+                <option value="2" disabled>第二组</option>
+                <option value="3" selected>第三组</option>
+            </select>
+            <hr>
+            <textarea name="selfinfo" style="resize: none;width: 280px;height: 50px;"></textarea>
+            <hr>
+            <input type="submit" value="submit" style="width: 150px">
+        </form>
+    </div>
+</body>
+
+</html>
