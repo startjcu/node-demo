@@ -135,7 +135,6 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     top: 100%;
     left: 4px;
-    ;
 }
 
 .userCard .picture {
@@ -164,6 +163,7 @@ h1, h2, h3, h4, h5, h6 {
 .userCard dl dt, .userCard dl dd {
     float: left;
     padding: 5px 0;
+    line-height: 1.3;
 }
 
 .userCard dl dt {
@@ -343,7 +343,7 @@ section.portfolio>nav .bar.state-3 .bar-inner {
 section.portfolio .works {
     position: relative;
 }
-section.portfolio .works>.big,
-section.portfolio .works>.small{
+
+section.portfolio .works>.big, section.portfolio .works>.small {
     position: absolute;
 }
