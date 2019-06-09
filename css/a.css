@@ -18,6 +18,14 @@ hr {
     border-top: 1px solid #DEDEDE;
 }
 
+ul, ol {
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
 .clearfix::after {
     content: '';
     display: block;
@@ -102,6 +110,7 @@ hr {
     max-width: 940px;
     margin: 0 auto;
     background-color: #fff;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, .3);
 }
 
 .userCard .welcome {
@@ -158,13 +167,13 @@ hr {
 }
 
 .userCard dl dt {
-    width: 30%;
+    width: 25%;
     font-weight: bold;
 }
 
 .userCard dl dd {
     color: #9da0a7;
-    width: 70%;
+    width: 75%;
 }
 
 .userCard>footer.media {
@@ -190,4 +199,151 @@ hr {
     height: 30px;
     fill: white;
     vertical-align: top;
+}
+
+body>main {
+    margin-top: -340px;
+}
+
+body>main .downloadResume-wrapper {
+    text-align: center;
+}
+
+body>main .downloadResume {
+    font-size: 14px;
+    line-height: 16px;
+    padding: 21px 55px;
+    display: inline-block;
+    border: 1px solid #CDCFD1;
+    background: #EFEFEF;
+    border-radius: 5px;
+    color: #3d4451;
+    font-weight: bold;
+    margin: 32px;
+    transition: box-shadow .5s;
+}
+
+body>main .downloadResume:hover {
+    box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.selfIntroduction {
+    max-width: 940px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.8;
+    font-family: KaiTi;
+}
+
+section.skills, section.portfolio {
+    max-width: 940px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+section.skills>h2, section.portfolio>h2 {
+    color: #3d4451;
+    font-size: 30px;
+    line-height: 1.2;
+    font-weight: 600;
+    text-align: center;
+}
+
+section.skills h3 {
+    font-size: 14px;
+    line-height: 1.1;
+    padding-right: 40px;
+}
+
+section.skills>ol {
+    background: white;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, .3);
+    padding: 42px 50px 10px;
+    margin-top: 30px;
+}
+
+section.skills>ol>li {
+    float: left;
+    width: 48%;
+}
+
+section.skills>ol>li:nth-child(even) {
+    float: right;
+}
+
+section.skills .progressBar {
+    height: 5px;
+    background: #fae1e1;
+    border-radius: 2px;
+    margin: 4px 0 40px;
+}
+
+section.skills .progressBar .progress {
+    height: 100%;
+    width: 70%;
+    background: #e6686a;
+    border-radius: 2px;
+}
+
+section.portfolio {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+section.portfolio>nav {
+    display: inline-block;
+    vertical-align: top;
+}
+
+section.portfolio>nav>ol {
+    margin-top: 30px;
+}
+
+section.portfolio>nav>ol>li {
+    float: left;
+    padding-left: 40px;
+    cursor: pointer;
+}
+
+section.portfolio>nav>ol>li:first-child {
+    padding-left: 0px;
+}
+
+section.portfolio>nav .bar {
+    height: 5px;
+    background: white;
+    margin-top: 5px;
+    margin-bottom: 30px;
+    border-radius: 2px;
+}
+
+section.portfolio>nav .bar-inner {
+    height: 100%;
+    background: #e6686a;
+    border-radius: 2px;
+    transition: all .5s;
+}
+
+section.portfolio>nav .bar.state-1 .bar-inner {
+    margin-left: 0;
+    width: 35px;
+}
+
+section.portfolio>nav .bar.state-2 .bar-inner {
+    margin-left: 66px;
+    width: 50px;
+}
+
+section.portfolio>nav .bar.state-3 .bar-inner {
+    margin-left: 60%;
+    width: 40%;
+}
+
+section.portfolio .works {
+    position: relative;
+}
+section.portfolio .works>.big,
+section.portfolio .works>.small{
+    position: absolute;
 }
