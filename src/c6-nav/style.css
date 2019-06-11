@@ -1,0 +1,56 @@
+header>h1 {
+    text-align: center;
+}
+
+main {
+    text-align: center;
+}
+
+main>div {
+    margin: .5em 0;
+}
+
+main>div>kbd {
+    border: 1px solid red;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 2em;
+    width: 4em;
+    padding: 1.5em 0;
+    text-transform: uppercase;
+    position: relative;
+    margin: 0 .2em;
+}
+
+main>div>kbd:hover {
+    background: lightblue;
+}
+
+main>div>kbd:active {
+    background: yellowgreen;
+}
+
+main>div>kbd>button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+
+main>div>kbd:hover>button {
+    display: inline-block;
+}
+
+main>div>kbd>span {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    color: green;
+    font-size: .5em;
+    text-transform: lowercase;
+}
+
+.row {
+    margin: 1.5em 0;
+}
