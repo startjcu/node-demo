@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>画布</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="200" height="150"></canvas>
+    <script>
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+
+        resizeWin()
+
+        window.onresize = function () {
+            resizeWin()
+        }
+
+        function resizeWin() {
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+        }
+
+        //画圆
+        function drawCircle(x, y, radius) {
+            ctx.beginPath()
+            ctx.arc(x, y, radius, 0, Math.PI * 2)
+            ctx.fillStyle = 'yellow'
+            ctx.fill()
+            ctx.closePath()
+        }
+
+        //画线
+        function drawLine(x1, y1, x2, y2) {
+            ctx.beginPath()
+            ctx.moveTo(x1, y1)
+            ctx.lineWidth = 2
+            ctx.lineTo(x2, y2)
+            ctx.strokeStyle = 'red'
+            ctx.stroke()
+            ctx.closePath()
+        }
+
+        var flag = false
+        var lastPoint = { x: undefined, y: undefined }
+
+        canvas.onmousedown = function (e) {
+            flag = true
+            var x = e.clientX
+            var y = e.clientY
+            drawCircle(x, y, 1)
+            lastPoint = { x, y }
+        }
+
+        canvas.onmousemove = function (e) {
+            if (flag) {
+                var x = e.clientX
+                var y = e.clientY
+                drawLine(lastPoint.x, lastPoint.y, x, y)
+                var newPoint = { x, y }
+                lastPoint = newPoint
+            }
+        }
+
+        canvas.onmouseup = function () {
+            flag = false
+        }
+    </script>
+</body>
+
+</html>
