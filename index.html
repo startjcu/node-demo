@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>冯义星的个人简历</title>
-    <link rel="stylesheet" href="./css/a.css">
+    <link rel="stylesheet" href="./css/loading.css">
+    <link rel="stylesheet" href="./css/main.css">
     <script src="//at.alicdn.com/t/font_1233104_045dc3xzmrmp.js"></script>
     <style type="text/css">
         .icon {
@@ -20,18 +21,29 @@
 </head>
 
 <body>
-    <div class="topNavBar">
+    <div class="site-welcome active" id="siteWelcome">
+        <p>网页正在加载中，请稍候……</p>
+        <div class="loading"></div>
+    </div>
+    <div class="topNavBar" id="topNavBar">
         <div class="topNavBar-inner clearfix">
             <a class="logo" href="#" alt="logo" style="float: left">
                 <span class="rs">RS</span><span class="card">card</span>
             </a>
-            <nav style="float: right">
+            <nav style="float: right" class="menu">
                 <ul class="clearfix">
-                    <li><a href="#">关于</a></li>
-                    <li><a href="#">技能</a></li>
-                    <li><a href="#">作品</a></li>
-                    <li><a href="#">博客</a></li>
-                    <li><a href="#">日历</a></li>
+                    <li><a href="#siteAbout" class="curPage">关于</a></li>
+                    <li><a href="#siteSkills" class="curPage">技能</a></li>
+                    <li class="menuTrigger">
+                        <a href="#siteWorks" class="curPage">作品</a>
+                        <ul class="submenu">
+                            <li>全部作品</li>
+                            <li>流行框架</li>
+                            <li>原生JS&CSS</li>
+                        </ul>
+                    </li>
+                    <li><a href="https://startjcu.com" target="_blank">博客</a></li>
+                    <li><a href="javascript:;">日历</a></li>
                     <li><a href="#">联系方式</a></li>
                     <li><a href="#">其他</a></li>
                 </ul>
@@ -42,7 +54,7 @@
         <div class="mask"></div>
     </div>
     <main>
-        <div class="userCard">
+        <div id="siteAbout" class="userCard">
             <div class="pictureAndText clearfix">
                 <div class="picture">
                     <img src="./image/avatar.jpg" width="299" height="347" alt="头像">
@@ -106,7 +118,7 @@
             有两年互联网工作经验，热爱并精于前端开发，熟悉Java和Python软件编程
         </p>
     </main>
-    <section class="skills">
+    <section id="siteSkills" class="skills">
         <h2>技能</h2>
         <ol class="clearfix">
             <li>
@@ -159,7 +171,7 @@
             </li>
         </ol>
     </section>
-    <section class="portfolio">
+    <section id="siteWorks" class="portfolio">
         <h2>作品集</h2>
         <nav>
             <ol class="clearfix">
@@ -194,6 +206,37 @@
             </div>
         </div>
     </section>
+    <script>
+        setTimeout(() => {
+            siteWelcome.classList.remove('active')
+        }, 2000);
+
+        window.onscroll = function () {
+            scrollY > 0 ? topNavBar.classList.add('sticky') : topNavBar.classList.remove('sticky')
+        }
+
+        let liTags = document.querySelectorAll('nav.menu>ul>li')
+        for (let i = 0; i < liTags.length; i++) {
+            liTags[i].onmouseenter = function (e) {
+                e.currentTarget.classList.add('active')
+            }
+            liTags[i].onmouseleave = function (e) {
+                e.currentTarget.classList.remove('active')
+            }
+        }
+
+        let aTags = document.querySelectorAll('nav.menu>ul>li>a.curPage')
+        for (let i = 0; i < aTags.length; i++) {
+            aTags[i].onclick = function (e) {
+                e.preventDefault()
+                let a = e.currentTarget
+                let href = a.getAttribute('href')
+                let element = document.querySelector(href)
+                let top = element.offsetTop
+                window.scrollTo(0, top - 60)
+            }
+        }
+    </script>
 </body>
 
 </html>

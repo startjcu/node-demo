@@ -1,0 +1,57 @@
+.loading {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+@keyframes loadingAnt {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: 1;
+    }
+    100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
+
+.loading::before, .loading::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: black;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 50%;
+    animation: loadingAnt 1.5s linear infinite;
+}
+
+.loading::after {
+    animation-delay: .75s
+}
+
+.site-welcome {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: lightgray;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.site-welcome.active {
+    display: flex;
+}
