@@ -54,7 +54,7 @@
         <div class="mask"></div>
     </div>
     <main>
-        <div id="siteAbout" class="userCard">
+        <div id="siteAbout" class="userCard" data-x>
             <div class="pictureAndText clearfix">
                 <div class="picture">
                     <img src="./image/avatar.jpg" width="299" height="347" alt="头像">
@@ -118,7 +118,7 @@
             有两年互联网工作经验，热爱并精于前端开发，熟悉Java和Python软件编程
         </p>
     </main>
-    <section id="siteSkills" class="skills">
+    <section id="siteSkills" class="skills" data-x>
         <h2>技能</h2>
         <ol class="clearfix">
             <li>
@@ -171,13 +171,13 @@
             </li>
         </ol>
     </section>
-    <section id="siteWorks" class="portfolio">
+    <section id="siteWorks" class="portfolio" data-x="">
         <h2>作品集</h2>
         <nav>
             <ol class="clearfix">
                 <li id="portfolio1">所有</li>
                 <li id="portfolio2">框架</li>
-                <li id="portfolio3">原生JS &amp; CSS</li>
+                <li id="portfolio3">原生JS&amp;CSS</li>
             </ol>
             <div id="portfolioBar" class="bar state-1">
                 <div class="bar-inner"></div>
@@ -206,13 +206,24 @@
             </div>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.4.0/Tween.min.js"></script>
     <script>
         setTimeout(() => {
             siteWelcome.classList.remove('active')
-        }, 2000);
+        }, 1500)
+
+        let specialTags = document.querySelectorAll('[data-x]')
+        for (let i = 0; i < specialTags.length; i++) {
+            specialTags[i].classList.add('offset')
+        }
+        setTimeout(() => {
+            init()
+        }, 2000)
 
         window.onscroll = function () {
             scrollY > 0 ? topNavBar.classList.add('sticky') : topNavBar.classList.remove('sticky')
+
+            init()
         }
 
         let liTags = document.querySelectorAll('nav.menu>ul>li')
@@ -225,7 +236,32 @@
             }
         }
 
+        function init() {
+            let specialTags = document.querySelectorAll('[data-x]')
+            let minIndex = 0
+            for (let i = 1; i < specialTags.length; i++) {
+                if (Math.abs(specialTags[i].offsetTop - scrollY) < Math.abs(specialTags[minIndex].offsetTop - scrollY)) {
+                    minIndex = i
+                }
+            }
+            specialTags[minIndex].classList.remove('offset')
+            let id = specialTags[minIndex].id
+            let a = document.querySelector(`a[href="#${id}"]`)
+            let li = a.parentElement
+            let broAndSelf = li.parentElement.children
+            for (let i = 0; i < broAndSelf.length; i++) {
+                broAndSelf[i].classList.remove('highlight')
+            }
+            li.classList.add('highlight')
+        }
+
         let aTags = document.querySelectorAll('nav.menu>ul>li>a.curPage')
+        function animate(time) {
+            requestAnimationFrame(animate)
+            TWEEN.update(time)
+        }
+        requestAnimationFrame(animate)
+
         for (let i = 0; i < aTags.length; i++) {
             aTags[i].onclick = function (e) {
                 e.preventDefault()
@@ -233,7 +269,19 @@
                 let href = a.getAttribute('href')
                 let element = document.querySelector(href)
                 let top = element.offsetTop
-                window.scrollTo(0, top - 60)
+                //滚动动画实现
+                let currentTop = scrollY
+                let targetTop = top - 60
+                let distance = targetTop - currentTop
+                var coords = { y: currentTop }
+                var time = Math.abs(distance / 100 * 300)
+                if (time > 500) { time = 500 }
+                var tween = new TWEEN.Tween(coords)
+                    .to({ y: targetTop }, time)
+                    .easing(TWEEN.Easing.Quadratic.InOut)
+                    .onUpdate(function () {
+                        scrollTo(0, coords.y)
+                    }).start()
             }
         }
     </script>
