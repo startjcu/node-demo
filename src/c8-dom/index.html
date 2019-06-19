@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .window {
+            width: 400px;
+            height: 300px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .images {
+            position: relative;
+        }
+
+        .images>img {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            transition: all .5s;
+        }
+
+        .images>img.current {
+            left: 0;
+            transform: translateX(0);
+            z-index: 1;
+        }
+
+        .images>img.leave {
+            transform: translateX(-100%);
+        }
+
+        .images>img.stay {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="window">
+        <div class="images">
+            <img src="./1.jpg" alt="picture" width="400" height="300">
+            <img src="./2.jpg" alt="picture" width="400" height="300">
+            <img src="./3.jpg" alt="picture" width="400" height="300">
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        //主干流程
+        init()
+        let n = 1
+        setInterval(() => {
+            //当前图片离开，离开后在进入等待状态
+            doLeave(getImage(n)).one('transitionend', (e) => { doStay($(e.currentTarget)) })
+            //等待状态的图片进入
+            doCurrent(getImage(n + 1))
+            n++
+        }, 3000)
+
+        /**逻辑封装**/
+        //重置计数
+        function resizeCount(n) {
+            if (n > 3) { (n %= 3) || (n = 3) }
+            return n
+        }
+
+        //初始化所有图片状态
+        function init() { $('.images>img:nth-child(1)').addClass('current').siblings().addClass('stay') }
+
+        //获取图片元素
+        function getImage(n) { return $(`.images>img:nth-child(${resizeCount(n)})`) }
+
+        //进入
+        function doCurrent($node) { return $node.removeClass('stay').addClass('current') }
+
+        //离开
+        function doLeave($node) { return $node.removeClass('current').addClass('leave') }
+
+        //等待
+        function doStay($node) { return $node.removeClass('leave').addClass('stay') }
+    </script>
+</body>
+
+</html>
