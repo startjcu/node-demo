@@ -58,7 +58,7 @@
         //主干流程
         init()
         let n = 1
-        setInterval(() => {
+        let timer = setInterval(() => {
             //当前图片离开，离开后在进入等待状态
             doLeave(getImage(n)).one('transitionend', (e) => { doStay($(e.currentTarget)) })
             //等待状态的图片进入
@@ -66,6 +66,19 @@
             n++
         }, 3000)
 
+        document.addEventListener('visibilitychange', function (e) {
+            if (document.hidden) {
+                clearInterval(timer)
+            } else {
+                timer = setInterval(() => {
+                    //当前图片离开，离开后在进入等待状态
+                    doLeave(getImage(n)).one('transitionend', (e) => { doStay($(e.currentTarget)) })
+                    //等待状态的图片进入
+                    doCurrent(getImage(n + 1))
+                    n++
+                }, 3000)
+            }
+        })
         /**逻辑封装**/
         //重置计数
         function resizeCount(n) {
