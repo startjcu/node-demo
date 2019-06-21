@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>优化后轮播</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .window {
+            width: 400px;
+            height: 300px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .images {
+            display: flex;
+            transition: all 1s;
+        }
+
+        .images>img {
+            width: 100%;
+        }
+
+        .container {
+            width: 400px;
+            margin: 0 auto;
+        }
+        button{
+            padding: 2px 10px;
+            cursor: pointer;
+            margin: 2px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="window">
+            <div class="images" id="slide">
+                <img src="./1.jpg" alt="picture" width="400" height="300">
+                <img src="./2.jpg" alt="picture" width="400" height="300">
+                <img src="./3.jpg" alt="picture" width="400" height="300">
+            </div>
+        </div>
+        <div id="controls" style="text-align: center">
+            <button id="previous">上一张</button>
+            <button id="next">下一张</button>
+        </div>
+        <div id="btnWrapper" style="text-align: center">
+
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+        </div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        let $buttons = $('#btnWrapper > button')
+        let $slide = $('#slide')
+        let $images = $slide.children('img')
+        let current = 0
+
+        makeFadeSlides()
+        $slide.css({ transform: 'translateX(-400px)' })
+        bindEvents()
+
+        $(previous).on('click', function () {
+            goToSlide(current - 1)
+        })
+
+        $(next).on('click', function () {
+            goToSlide(current + 1)
+        })
+
+        let timer = setInterval(() => {
+            goToSlide(current + 1)
+        }, 2000);
+
+        $('.container').on('mouseenter', function () {
+            clearInterval(timer)
+        }).on('mouseleave', function () {
+            timer = setInterval(() => {
+                goToSlide(current + 1)
+            }, 2000);
+        })
+
+        $(document).on('visibilitychange', function () {
+            if (document.hidden) {
+                clearInterval(timer)
+            } else {
+                timer = setInterval(() => {
+                    goToSlide(current + 1)
+                }, 2000);
+            }
+        })
+
+        function makeFadeSlides() {
+            let $firstCopy = $images.eq(0).clone(true)
+            let $lastCopy = $images.eq($images.length - 1).clone(true)
+            $slide.append($firstCopy)
+            $slide.prepend($lastCopy)
+        }
+
+        function bindEvents() {
+            $('#btnWrapper').on('click', 'button', function (e) {
+                let $button = $(e.currentTarget)
+                let index = $button.index()
+                goToSlide(index)
+            })
+        }
+
+        function goToSlide(index) {
+            if (index > $buttons.length - 1) {
+                index = 0
+            } else if (index < 0) {
+                index = $buttons.length - 1
+            }
+            if (current === $buttons.length - 1 && index === 0) {
+                //最后一张到第一张
+                $slide.css({ transform: `translateX(${-($buttons.length + 1) * 400}px` })
+                    .one('transitionend', function () {
+                        $slide.hide().offset()
+                        $slide.css({ transform: `translateX(${-(index + 1) * 400}px` }).show()
+                    })
+            } else if (current === 0 && index === $buttons.length - 1) {
+                //第一张到最后一张
+                $slide.css({ transform: `translateX(0px` })
+                    .one('transitionend', function () {
+                        $slide.hide().offset()
+                        $slide.css({ transform: `translateX(${-(index + 1) * 400}px` }).show()
+                    })
+            } else {
+                $slide.css({ transform: `translateX(${-(index + 1) * 400}px` })
+            }
+            current = index
+        }
+
+    </script>
+
+</body>
+
+</html>
