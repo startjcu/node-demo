@@ -27,7 +27,7 @@
             image.src = '/pay'
             image.onload = function () {
                 alert('success')
-                location.reload()
+                amount.innerText -= 1
             }
             image.onerror = function () {
                 alert('fail')
