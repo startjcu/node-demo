@@ -19,30 +19,19 @@
 <body>
     <h1>账户余额: <span id="amount">&&&amount&&&</span></h1>
     <button id="btn">付款1块钱</button>
+    <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script>
         var btn = document.getElementById('btn')
         //使用script标签发送请求
         btn.addEventListener('click', function () {
-            let script = document.createElement('script')
-            let functionName = 'star' + parseInt(Math.random() * 100000)
-            script.src = 'http://127.0.0.1:8887/pay?callback=' + functionName
-            window[functionName] = function (result) {
-                if (result) {
+            $.ajax({
+                url: 'http://127.0.0.1:8887/pay',
+                dataType: 'jsonp',
+                success: function (response) {
+                    console.log(response)
                     amount.innerText -= 1
                 }
-            }
-            
-            //只有把script放在body里，浏览器才会发请求
-            document.body.appendChild(script)
-            script.onload = function (e) {
-                alert('success')
-                e.currentTarget.remove()
-                delete window[functionName]
-            }
-            script.onerror = function () {
-                alert('fail')
-                delete window[functionName]
-            }
+            })
         })
     </script>
 </body>
