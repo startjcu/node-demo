@@ -35,8 +35,9 @@ var server = http.createServer(function (request, response) {
         var amount = fs.readFileSync('./db', 'utf8')
         var newAmount = amount - 1//-号会自动将字符串转为数字
         fs.writeFileSync('./db', newAmount)
+        response.setHeader('Content-Type','application/javascript')
         response.statusCode = 200
-        response.write(fs.readFileSync('./favicon.png'))
+        response.write(`amount.innerText-=1`)
         response.end()
     } else {
         response.statusCode = 404

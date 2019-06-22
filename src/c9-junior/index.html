@@ -21,15 +21,17 @@
     <button id="btn">付款1块钱</button>
     <script>
         var btn = document.getElementById('btn')
-        //使用图片发请求，只能使用GET方法
+        //使用script标签发送请求
         btn.addEventListener('click', function () {
-            let image = document.createElement('img')
-            image.src = '/pay'
-            image.onload = function () {
-                alert('success')
-                amount.innerText -= 1
+            let script = document.createElement('script')
+            script.src = '/pay'
+            //只有把script放在body里，浏览器才会发请求
+            document.body.appendChild(script)
+            script.onload=function(e){
+                debugger
+                e.currentTarget.remove()
             }
-            image.onerror = function () {
+            script.onerror = function () {
                 alert('fail')
             }
         })
