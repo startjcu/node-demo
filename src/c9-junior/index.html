@@ -18,11 +18,22 @@
 
 <body>
     <h1>账户余额: <span id="amount">&&&amount&&&</span></h1>
-    <form action="/pay" method="POST" target="result">
-        <input type="text" name="number" value="1" disabled>
-        <input type="submit" value="付款">
-    </form>
-    <iframe name="result" src="abount:blank" frameborder="0" height="200"></iframe>
+    <button id="btn">付款1块钱</button>
+    <script>
+        var btn = document.getElementById('btn')
+        //使用图片发请求，只能使用GET方法
+        btn.addEventListener('click', function () {
+            let image = document.createElement('img')
+            image.src = '/pay'
+            image.onload = function () {
+                alert('success')
+                location.reload()
+            }
+            image.onerror = function () {
+                alert('fail')
+            }
+        })
+    </script>
 </body>
 
 </html>
