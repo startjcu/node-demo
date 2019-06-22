@@ -53,11 +53,18 @@
     <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script>
         //冒泡是同步的，将事件document的事件通过one绑定到btn点击事件内部，可以减少内存消耗
-        $('#btn').on('click', function () {
-            $('#popover').show()
-            $(document).one('click', function () {
-                console.log('document 被点击了')
+        $('#btn').on('click', function (e) {
+            var list = e.currentTarget.classList
+            if (list.length === 0) {
+                $('#popover').show()
+                $(e.currentTarget).addClass('flag')
+            } else {
                 $('#popover').hide()
+                $(e.currentTarget).removeClass('flag')
+            }
+            $(document).one('click', function () {
+                $('#popover').hide()
+                $('#btn').removeClass('flag')
             })
         })
         $('#wrapper').on('click', function (e) {
