@@ -20,7 +20,6 @@
     <script src="https://cdn.bootcss.com/react-dom/16.9.0-alpha.0/umd/react-dom.production.min.js"></script>
     <script>
         let number = 0
-        let h = React.createElement
 
         let btn1Click = () => {
             number += 1
@@ -35,11 +34,13 @@
         render()
 
         function render() {
-            let div = h('div', { className: 'parent' },
-                h('span', { className: 'red' }, number),
-                h('button', { onClick: btn1Click }, '+'),
-                h('button', { onClick: btn2Click }, '-'))
-            ReactDOM.render(div, document.querySelector('#root'))
+            ReactDOM.render(
+                <div className='parent'>
+                    <span className='red'>{number}</span>
+                    <button onClick={btn1Click}>+</button>
+                    <button onClick={btn2Click}>-</button>
+                </div>
+                , document.querySelector('#root'))
         }
     </script>
 </body>
