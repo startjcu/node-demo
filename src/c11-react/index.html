@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js</title>
+</head>
+
+<body>
+    <h1 id="result">0</h1>
+    <button id="add">+</button>
+    <button id="minus">-</button>
+
+    <script>
+        var result = document.querySelector('#result')
+        var add = document.querySelector('#add')
+        var minus = document.querySelector('#minus')
+
+        add.addEventListener('click', function () {
+            var number = parseInt(result.innerText, 10)
+            result.innerText = number + 1
+        })
+
+        minus.addEventListener('click', function () {
+            var number = parseInt(result.innerText, 10)
+            result.innerText = number - 1
+        })
+    </script>
+</body>
+
+</html>

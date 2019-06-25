@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>react</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="https://cdn.bootcss.com/react/16.9.0-alpha.0/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.9.0-alpha.0/umd/react-dom.production.min.js"></script>
+    <script>
+        let number = 0
+        let h = React.createElement
+
+        let btn1Click = () => {
+            number += 1
+            render()
+        }
+
+        let btn2Click = () => {
+            number -= 1
+            render()
+        }
+
+        render()
+
+        function render() {
+            let div = h('div', { className: 'parent' },
+                h('span', { className: 'red' }, number),
+                h('button', { onClick: btn1Click }, '+'),
+                h('button', { onClick: btn2Click }, '-'))
+            ReactDOM.render(div, document.querySelector('#root'))
+        }
+    </script>
+</body>
+
+</html>
