@@ -33,14 +33,18 @@
 
         render()
 
-        function render() {
-            ReactDOM.render(
+        function App() {
+            return (
                 <div className='parent'>
                     <span className='red'>{number}</span>
                     <button onClick={btn1Click}>+</button>
                     <button onClick={btn2Click}>-</button>
                 </div>
-                , document.querySelector('#root'))
+            )
+        }
+
+        function render() {
+            ReactDOM.render(<app />, document.querySelector('#root'))
         }
     </script>
 </body>
