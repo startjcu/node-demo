@@ -15,19 +15,18 @@
 
 <body>
     <div id="root"></div>
-
     <script src="https://cdn.bootcss.com/react/16.9.0-alpha.0/umd/react.production.min.js"></script>
     <script src="https://cdn.bootcss.com/react-dom/16.9.0-alpha.0/umd/react-dom.production.min.js"></script>
     <script>
         let number = 0
 
-        let btn1Click = () => {
-            number += 1
+        let handleBtn1Click = () => {
+            number++
             render()
         }
 
-        let btn2Click = () => {
-            number -= 1
+        let handleBtn2Click = () => {
+            number--
             render()
         }
 
@@ -35,17 +34,15 @@
 
         function App() {
             return (
-                <div className='parent'>
-                    <span className='red'>{number}</span>
-                    <button onClick={btn1Click}>+</button>
-                    <button onClick={btn2Click}>-</button>
+                <div className="parent">
+                    <h1 className="red">{number}</h1>
+                    <button onClick={handleBtn1Click}>+</button>
+                    <button onClick={handleBtn2Click}>-</button>
                 </div>
             )
         }
 
-        function render() {
-            ReactDOM.render(<app />, document.querySelector('#root'))
-        }
+        function render() { ReactDOM.render(<App />, document.querySelector('#root')) }
     </script>
 </body>
 

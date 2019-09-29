@@ -15,17 +15,15 @@
 
     <script>
         var result = document.querySelector('#result')
-        var add = document.querySelector('#add')
-        var minus = document.querySelector('#minus')
 
+        var add = document.querySelector('#add')
         add.addEventListener('click', function () {
-            var number = parseInt(result.innerText, 10)
-            result.innerText = number + 1
+            result.innerText = parseInt(result.innerText, 10) + 1
         })
 
+        var minus = document.querySelector('#minus')
         minus.addEventListener('click', function () {
-            var number = parseInt(result.innerText, 10)
-            result.innerText = number - 1
+            result.innerText = parseInt(result.innerText, 10) - 1
         })
     </script>
 </body>

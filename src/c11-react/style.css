@@ -1,0 +1,43 @@
+@media(max-width:800px) and (min-width:600px) {
+    body {
+        background: red;
+    }
+}
+
+main {
+    flex: 1;
+    overflow: auto;
+}
+
+.container {
+    justify-items: center
+}
+
+.item {
+    grid-area: footer;
+}
+
+/*用左上角和右下角来确定子元素区域，grid-area: 起始水平线 / 起始垂直线 / 末尾水平线 / 终止垂直线 ;*/
+
+.item {
+    grid-area: footer;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto 20% 1fr;
+    grid-template-rows: 20px auto 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    display: flow-root;
+}
+
+img { vertical-align: middle; }
+
+div{
+    background: url()
+}

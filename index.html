@@ -206,7 +206,22 @@
             </div>
         </div>
     </section>
+    <section class="message">
+        <h2>留言墙</h2>
+        <ol id="messageList"></ol>
+        <form id="postMessage" style="width: 700px;margin: 10px auto;">
+            <label>姓名:
+                <input type="text" name="user" style="width: 100px; height: 28px;" autocomplete="off">
+            </label>
+            <label>留言内容:
+                <input type="text" name="content" style="width: 400px; height: 28px;" autocomplete="off">
+            </label>
+            <input type="submit" value="提交留言" style="height: 28px;">
+        </form>
+    </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.4.0/Tween.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.15.0/dist/av-min.js"></script>
+    <script src="./src/js/message.js"></script>
     <script>
         setTimeout(() => {
             siteWelcome.classList.remove('active')
